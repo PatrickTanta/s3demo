@@ -27,9 +27,9 @@ os.makedirs(PARQUET_DIR, exist_ok=True)
 
 def create_parquet_files():
     data = {
-        "id": [1, 2, 3, 4],
-        "name": ["Alice", "Bob", "Charlie", "Diana"],
-        "age": [25, 30, 35, 40]
+        "id": [5, 6, 7, 8],
+        "name": ["chuñwa", "juluioi", "javier", "richard"],
+        "age": [25, 20, 25, 24]
     }
     df = pd.DataFrame(data)
     parquet_path = os.path.join(PARQUET_DIR, "data.parquet")
@@ -46,7 +46,7 @@ def load_parquet_to_postgres(parquet_path):
     conn = engine.connect()
     table = pq.read_table(parquet_path)
     df = table.to_pandas()
-    df.to_sql(TABLE_NAME, conn, if_exists="replace", index=False)
+    df.to_sql(TABLE_NAME, conn, if_exists="append", index=False)
     print(f"Data loaded into PostgreSQL table '{TABLE_NAME}'")
     conn.close()
 
